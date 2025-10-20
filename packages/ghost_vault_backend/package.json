@@ -1,0 +1,7 @@
+{
+	"type": "module",
+	"dependencies": {},
+	"devDependencies": {
+		"@types/node": "^24.8.1"
+	}
+}

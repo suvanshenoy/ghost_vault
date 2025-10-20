@@ -1,0 +1,52 @@
+
+
+version: "3"
+
+vars:
+  WATCH_CMD: watchexec -c -e
+  BACKEND_WORK_DIR: ./packages/ghost_vault_backend
+  BACKEND_CLEAN_CMD: gleam clean
+  BACKEND_SETUP_CMD: gleam deps download
+  BACKEND_RUN_CMD: tsgo.CMD && gleam run -m main
+  APP_WORK_DIR: ./packages/ghost_vault_app
+  APP_CLEAN_CMD: flutter clean
+  APP_SETUP_CMD: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+  APP_DEVICE_RUN_CMD: flutter run -d
+  APP_RUN_CMD: flutter run
+
+tasks:
+  app:clean:
+    dir: "{{.APP_WORK_DIR}}"
+    desc: Cleans build for the app
+    cmds:
+      - "{{.APP_CLEAN_CMD}}"
+
+  app:run:
+    dir: "{{.APP_WORK_DIR}}"
+    desc: Runs ghost vault app
+    dotenv:
+      - .env
+    cmds:
+      - "{{.APP_SETUP_CMD}}"
+      - "{{.APP_DEVICE_RUN_CMD}} $ANDROID_DEVICE_ID"
+      - "{{.APP_RUN_CMD}}"
+
+  backend:clean:
+    dir: "{{.BACKEND_WORK_DIR}}"
+    desc: Cleans build for the backend in watch mode
+    cmds:
+      - "{{.BACKEND_CLEAN_CMD}}"
+
+  backend:watch:
+    dir: "{{.BACKEND_WORK_DIR}}"
+    desc: Runs ghost vault backend
+    cmds:
+      - "{{.BACKEND_SETUP_CMD}}"
+      - "{{.WATCH_CMD}} gleam,ts,toml,json '{{.BACKEND_RUN_CMD}}'"
+
+  backend:run:
+    dir: "{{.BACKEND_WORK_DIR}}"
+    desc: Runs ghost vault backend
+    cmds:
+      - "{{.BACKEND_SETUP_CMD}}"
+      - "{{.BACKEND_RUN_CMD}}"
