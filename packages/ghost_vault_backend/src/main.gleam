@@ -1,26 +1,36 @@
 import gleam/int
 import gleam/javascript/promise
 import gleam/result
+import logger/logger
 import smol
-
-pub type EnvPath =
-  String
-
-pub type EnvKeys =
-  String
-
-pub type EnvValue =
-  String
-
-@external(javascript, "./utils/env.ts", "getEnv")
-fn get_env(env_path: EnvPath, env_key: EnvKeys) -> EnvValue
+import utils/env
 
 pub fn main() {
-  let port = get_env(".env", "BACKEND_PORT")
+  let port = env.get_env(".env", "BACKEND_PORT")
 
-  smol.new(handler)
-  |> smol.port(result.unwrap(int.parse(port), 8000))
-  |> smol.start
+  use server <- promise.await(
+    smol.new(handler)
+    |> smol.after_start(fn(port, _) {
+      logger.log(
+        "info",
+        "server started at " <> "http://localhost:" <> int.to_string(port),
+      )
+    })
+    |> smol.port(result.unwrap(int.parse(port), 8000))
+    |> smol.start,
+  )
+
+  case server {
+    Ok(server) -> {
+      use _ <- promise.await(promise.wait(10_000))
+      use _ <- promise.await(smol.stop(server))
+      logger.log("info", "server stopped")
+      promise.resolve(Nil)
+    }
+    Error(_) -> {
+      promise.resolve(Nil)
+    }
+  }
 }
 
 fn handler(_) -> promise.Promise(smol.Response) {
