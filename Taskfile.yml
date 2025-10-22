@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# https://taskfile.dev
-=======
-
->>>>>>> ff8ed40 (chore: add the initial structure of ghost_vault)
-
 version: "3"
 
 vars:
@@ -29,38 +23,20 @@ tasks:
     dir: "{{.APP_WORK_DIR}}"
     desc: Runs ghost vault app
     dotenv:
-<<<<<<< HEAD
       - ./.env
     cmds:
       - "{{.APP_SETUP_CMD}}"
-      - "{{.APP_DEVICE_RUN_CMD}} $APP_ANDROID_DEVICE_ID"
-=======
-      - .env
-    cmds:
-      - "{{.APP_SETUP_CMD}}"
       - "{{.APP_DEVICE_RUN_CMD}} $ANDROID_DEVICE_ID"
->>>>>>> ff8ed40 (chore: add the initial structure of ghost_vault)
-      - "{{.APP_RUN_CMD}}"
 
   backend:clean:
     dir: "{{.BACKEND_WORK_DIR}}"
     desc: Cleans build for the backend in watch mode
-<<<<<<< HEAD
-    dotenv:
-      - ./.env
-=======
->>>>>>> ff8ed40 (chore: add the initial structure of ghost_vault)
     cmds:
       - "{{.BACKEND_CLEAN_CMD}}"
 
   backend:watch:
     dir: "{{.BACKEND_WORK_DIR}}"
     desc: Runs ghost vault backend
-<<<<<<< HEAD
-    dotenv:
-      - ./.env
-=======
->>>>>>> ff8ed40 (chore: add the initial structure of ghost_vault)
     cmds:
       - "{{.BACKEND_SETUP_CMD}}"
       - "{{.WATCH_CMD}} gleam,ts,toml,json '{{.BACKEND_RUN_CMD}}'"
@@ -68,11 +44,6 @@ tasks:
   backend:run:
     dir: "{{.BACKEND_WORK_DIR}}"
     desc: Runs ghost vault backend
-<<<<<<< HEAD
-    dotenv:
-      - ./.env
-=======
->>>>>>> ff8ed40 (chore: add the initial structure of ghost_vault)
     cmds:
       - "{{.BACKEND_SETUP_CMD}}"
       - "{{.BACKEND_RUN_CMD}}"
