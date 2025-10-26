@@ -7,7 +7,7 @@ vars:
   BACKEND_WORK_DIR: ./packages/ghost_vault_backend
   BACKEND_CLEAN_CMD: gleam clean
   BACKEND_SETUP_CMD: gleam deps download
-  BACKEND_RUN_CMD: tsgo.CMD && gleam run -m main
+  BACKEND_RUN_CMD: tsgo && gleam run -m main
   APP_WORK_DIR: ./packages/ghost_vault_app
   APP_CLEAN_CMD: flutter clean
   APP_SETUP_CMD: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
