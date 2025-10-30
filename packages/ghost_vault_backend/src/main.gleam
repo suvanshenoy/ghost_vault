@@ -3,7 +3,7 @@ import gleam/javascript/promise
 import gleam/result
 import logger/logger
 import smol
-import utils/env
+import utils/env/env
 
 pub fn main() {
   let port = env.get_env(".env", "BACKEND_PORT")

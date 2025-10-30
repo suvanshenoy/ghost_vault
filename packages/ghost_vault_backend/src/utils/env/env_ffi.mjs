@@ -1,8 +1,16 @@
+// @ts-check
+
 import * as process from "node:process";
 
-type EnvKeys = "BACKEND_PORT" | "BACKEND_SECRET_BASE_KEY";
+/**
+ * @typedef {"BACKEND_PORT" | "BACKEND_SECRET_BASE_KEY"} EnvKeys
+ */
 
-export function getEnv(envPath: string, envKey: EnvKeys): string | undefined {
+/**
+ * @param {string} envPath
+ * @param {EnvKeys} envKey
+ */
+export function getEnv(envPath, envKey) {
 	process.loadEnvFile(envPath);
 
 	if (envKey === "BACKEND_PORT") {

@@ -1,2 +1,2 @@
-@external(javascript, "./logger.ts", "log")
-pub fn log(log_level: String, message: String) -> Nil
+@external(javascript, "./logger_ffi.mjs", "log")
+pub fn log(level: String, message: String) -> Nil

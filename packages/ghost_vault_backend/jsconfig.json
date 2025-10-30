@@ -1,11 +1,10 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
+	"$schema": "https://json.schemastore.org/jsconfig",
 	"compilerOptions": {
 		"target": "esnext",
 		"module": "esnext",
-		"moduleResolution": "bundler",
 		"noEmit": true,
-		"allowImportingTsExtensions": true,
+		"moduleResolution": "bundler",
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,

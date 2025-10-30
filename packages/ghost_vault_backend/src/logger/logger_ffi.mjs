@@ -1,3 +1,5 @@
+// @ts-check
+
 import winston from "winston";
 
 const logger = winston.createLogger({
@@ -11,9 +13,15 @@ const logger = winston.createLogger({
 	transports: [new winston.transports.Console()],
 });
 
-type LogLevel = "info" | "error";
+/**
+ * @typedef {"info" | "error"} LogLevel
+ */
 
-export function log(level: LogLevel, message: string) {
+/**
+ * @param {LogLevel} level
+ * @param {string} message
+ */
+export function log(level, message) {
 	if (level === "info") {
 		logger.info(message);
 		console.log();
