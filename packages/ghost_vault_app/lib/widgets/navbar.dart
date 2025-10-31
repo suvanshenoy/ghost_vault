@@ -23,27 +23,27 @@ class _NavbarState extends State<Navbar> {
             currentPageIndex = index;
           });
         },
-        indicatorColor: Colors.blue,
+        indicatorColor: Themes.color1,
         selectedIndex: currentPageIndex,
-        destinations: const <NavigationDestination>[
+        destinations: <NavigationDestination>[
           NavigationDestination(
             icon: Badge(
               isLabelVisible: false,
-              child: Icon(CupertinoIcons.home),
+              child: Icon(CupertinoIcons.home, color: Themes.color2),
             ),
             label: 'Home',
           ),
           NavigationDestination(
             icon: Badge(
               isLabelVisible: false,
-              child: Icon(CupertinoIcons.lock),
+              child: Icon(CupertinoIcons.lock, color: Themes.color2),
             ),
             label: 'Vault',
           ),
           NavigationDestination(
             icon: Badge(
               isLabelVisible: false,
-              child: Icon(CupertinoIcons.bell),
+              child: Icon(CupertinoIcons.bell, color: Themes.color2),
             ),
             label: 'Notifications',
           ),
